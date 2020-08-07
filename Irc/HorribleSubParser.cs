@@ -1,0 +1,109 @@
+﻿using AnimeDrive.Models;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace AnimeDrive.Irc
+{
+    public class HorribleSubParser
+    {
+        private const string BOT_LINE_INDICATOR = "javascript:p.nickPacks('";
+
+        public static double ParseEpisode(string fName)
+        {
+            var lastDash = fName.LastIndexOf('-') + 1;
+            var lastRes = fName.LastIndexOf('[');
+            var numString = fName.Substring(lastDash, lastRes - lastDash);
+            numString = numString.Trim();
+
+            double res = 0;
+            Double.TryParse(numString, out res);
+
+            return res;
+        }
+
+        internal async Task<IEnumerable<HorribleSubPack>> ParsePacklistAsync(
+            Stream stream,
+            CancellationToken token)
+        {
+            var packAsJson = await ReadStreamAsync(
+                stream,
+                token,
+                GetPackAsJson);
+
+            return packAsJson.Select(JsonConvert.DeserializeObject<HorribleSubPack>);
+        }
+
+        internal async Task<IEnumerable<string>> ParseBotsAsync(
+            Stream stream,
+            CancellationToken token)
+        {
+            return await ReadStreamAsync(
+                stream,
+                token,
+                GetBotName);
+        }
+
+        private static async Task<IEnumerable<T>> ReadStreamAsync<T>(
+            Stream stream,
+            CancellationToken token,
+            Func<string, T> callback)
+
+            where T : class
+        {
+            var result = new List<T>();
+
+            using (var reader = new StreamReader(stream))
+            {
+                var line = await reader.ReadLineAsync();
+
+                while (!string.IsNullOrWhiteSpace(line) && !token.IsCancellationRequested)
+                {
+                    var value = callback.Invoke(line);
+
+                    if (value != null)
+                        result.Add(value);
+
+                    line = await reader.ReadLineAsync();
+                }
+            }
+
+            stream.Dispose();
+
+            return result;
+        }
+
+        private static string GetPackAsJson(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input))
+                return null;
+
+            var split = input.Split('=');
+
+            if (split.Length < 2)
+                return null;
+
+            var json = split[1];
+
+            if (json.EndsWith(";"))
+                json = json.Substring(0, json.Length - 1);
+
+            return json;
+        }
+
+        private static string GetBotName(string input)
+        {
+            if (string.IsNullOrWhiteSpace(input) || !input.Contains(BOT_LINE_INDICATOR))
+                return null;
+
+            var split = input.Split('\'');
+
+            return split.Length < 3 ? null : split[1];
+        }
+    }
+}

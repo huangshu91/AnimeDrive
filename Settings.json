@@ -1,0 +1,42 @@
+﻿{
+  "HandbrakeCLIPath": "C:\\Program Files\\HandBrake\\CLI\\HandBrakeCLI.exe",
+
+  "FolderInput": "F:\\Anime",
+
+  "FolderOutput": "F:\\Anime\\Encoded",
+
+  "FileExpiry": 12,
+
+  "SyncTime":  20,
+
+  "Patterns": [
+    {
+      "p": "futekigousha",
+      "f": 2
+    },
+    {
+      "p": "teibou nisshi",
+      "f": 2
+    },
+    {
+      "p": "deca-dence",
+      "f": 2
+    },
+    {
+      "p": "re zero",
+      "f": 26
+    },
+    {
+      "p": "okarishimasu",
+      "f": 2
+    },
+    {
+      "p": "uzaki-chan",
+      "f": 2
+    },
+    {
+      "p": "monster musume oisha-san",
+      "f": 1
+    }
+  ]
+}
