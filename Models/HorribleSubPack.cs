@@ -1,4 +1,5 @@
 ﻿using AnimeDrive.Irc;
+using AnimeDrive.Models.Parsers;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,8 @@ namespace AnimeDrive.Models
         {
             get
             {
-                return HorribleSubParser.ParseEpisode(Filename);
+                var parser = new HorribleSubParser();
+                return parser.ParseEpisode(Filename);
             }
         }
 

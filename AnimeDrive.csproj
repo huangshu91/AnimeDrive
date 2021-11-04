@@ -43,19 +43,23 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityBase.cs" />
     <Compile Include="ActivityTasks\DccDownloadActivityTask.cs" />
     <Compile Include="ActivityTasks\GetFilteredPacksActivityTask.cs" />
     <Compile Include="ActivityTasks\GetPacklistActivityTask.cs" />
+    <Compile Include="ActivityTasks\LoadMagnetQBActivityTask.cs" />
+    <Compile Include="ActivityTasks\ReadRssActivityTask.cs" />
     <Compile Include="AnimeDrive.cs" />
     <Compile Include="CleanupFilesActivity.cs" />
     <Compile Include="DiscoverFilesActivity.cs" />
     <Compile Include="ActivityTasks\DriveUploadActivityTask.cs" />
     <Compile Include="ActivityTasks\EncodeActivityTask.cs" />
     <Compile Include="DownloadFilesActivity.cs" />
+    <Compile Include="DownloadRssTorrentActivity.cs" />
     <Compile Include="EncodeFilesActivity.cs" />
     <Compile Include="Irc\DCCClient.cs" />
     <Compile Include="Irc\DCCEventArgs.cs" />
-    <Compile Include="Irc\HorribleSubParser.cs" />
+    <Compile Include="Irc\HorribleSubIrcParser.cs" />
     <Compile Include="Irc\IrcClient.cs" />
     <Compile Include="Irc\IrcCommands.cs" />
     <Compile Include="Irc\IrcReceivedEventArgs.cs" />
@@ -64,13 +68,22 @@
     <Compile Include="Models\AnimeDriveSettings.cs" />
     <Compile Include="Models\AnimeFile.cs" />
     <Compile Include="Models\AnimeFileDatabase.cs" />
+    <Compile Include="Models\Parsers\SubsPleaseParser.cs" />
+    <Compile Include="Models\Parsers\FilenameParserEnum.cs" />
     <Compile Include="Models\HorribleSubPack.cs" />
+    <Compile Include="Models\Parsers\EraiRawParser.cs" />
+    <Compile Include="Models\Parsers\HorribleSubParser.cs" />
+    <Compile Include="Models\Parsers\IFilenameParser.cs" />
     <Compile Include="Models\PatternFilter.cs" />
     <Compile Include="Models\ProgramSettings.cs" />
+    <Compile Include="Models\SubsPleaseRss.cs" />
     <Compile Include="UploadFilesActivity.cs" />
     <Compile Include="Util\Util.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CodeHollow.FeedReader, Version=1.2.2.0, Culture=neutral, PublicKeyToken=66d870f2b3d70f48, processorArchitecture=MSIL">
+      <HintPath>packages\CodeHollow.FeedReader.1.2.2\lib\net452\CodeHollow.FeedReader.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis, Version=1.45.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>packages\Google.Apis.1.45.0\lib\net45\Google.Apis.dll</HintPath>
     </Reference>

@@ -20,12 +20,12 @@ namespace AnimeDrive.ActivityTasks
         private const string BOT_PACKS_URL = "https://xdcc.horriblesubs.info/search.php?nick={0}";
 
         private readonly HttpClient _http;
-        private readonly HorribleSubParser _parser;
+        private readonly HorribleSubIrcParser _parser;
 
         public GetPacklistActivityTask(HttpClient httpClient)
         {
             _http = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
-            _parser = new HorribleSubParser();
+            _parser = new HorribleSubIrcParser();
         }
 
         /// <summary>

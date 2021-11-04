@@ -24,7 +24,9 @@ namespace AnimeDrive
 
         public bool Execute(List<AnimeFile> files)
         {
-            
+
+            Console.WriteLine(string.Format("Uploading {0} Files...", files.Count));
+
             foreach (var f in files)
             {
                 DriveUploadActivityTask driveupload = new DriveUploadActivityTask(db);

@@ -1,42 +1,68 @@
 ﻿{
   "HandbrakeCLIPath": "C:\\Program Files\\HandBrake\\CLI\\HandBrakeCLI.exe",
 
-  "FolderInput": "F:\\Anime",
+  "QBittorrentCLIPath": "C:\\Program Files (x86)\\qbittorrent-cli\\qbt.exe",
 
-  "FolderOutput": "F:\\Anime\\Encoded",
+  "QBittorrentURL": "http://localhost:8080",
+
+  "FolderInput": "G:\\",
+
+  "Extensions": ".mkv",
+
+  "FolderOutput": "G:\\Encoded",
 
   "FileExpiry": 12,
 
-  "SyncTime":  20,
+  "SyncTime": 20,
 
   "Patterns": [
     {
-      "p": "futekigousha",
-      "f": 2
+      "p": "jahy-sama"
     },
     {
-      "p": "teibou nisshi",
-      "f": 2
+      "p": "tawawa"
     },
     {
-      "p": "deca-dence",
-      "f": 2
+      "p": "ganbare"
     },
     {
-      "p": "re zero",
-      "f": 26
+      "p": "mushoku"
     },
     {
-      "p": "okarishimasu",
-      "f": 2
+      "p": "nosferatu"
     },
     {
-      "p": "uzaki-chan",
-      "f": 2
+      "p": "mieruko-chan"
     },
     {
-      "p": "monster musume oisha-san",
-      "f": 1
+      "p": "shokudou s2"
+    },
+    {
+      "p": "takt"
+    },
+    {
+      "p": "alternative"
+    },
+    {
+      "p": "sakugan"
+    },
+    {
+      "p": "senpai uzai"
+    },
+    {
+      "p": "saihate paladin"
+    },
+    {
+      "p": "kimetsu yaiba"
+    },
+    {
+      "p": "ousama"
+    },
+    {
+      "p": "aquatope"
+    },
+    {
+      "p": "comyushou"
     }
   ]
 }

@@ -5,21 +5,23 @@ using System.Threading;
 
 namespace AnimeDrive
 {
-    public class AnimeDrive
+  public class AnimeDrive
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            AnimeFileDatabase db = new AnimeFileDatabase();
-            ProgramSettings ps = new ProgramSettings();
+      AnimeFileDatabase db = new AnimeFileDatabase();
+      ProgramSettings ps = new ProgramSettings();
 
+      /*
             DownloadFilesActivity downloadActivity = new DownloadFilesActivity(db, ps);
             DiscoverFilesActivity discoverActivity = new DiscoverFilesActivity(db, ps);
             EncodeFilesActivity encodeActivity = new EncodeFilesActivity(db, ps);
             UploadFilesActivity uploadActivity = new UploadFilesActivity(db, ps);
-
+      */
+      /*
             Action runCycle = () =>
             {
-                downloadActivity.Execute();
+                //downloadActivity.Execute();
 
                 discoverActivity.Execute();
 
@@ -31,30 +33,55 @@ namespace AnimeDrive
 
                 uploadActivity.Execute(encoded);
             };
+      */
 
-            Stopwatch timer = new Stopwatch();
+      Stopwatch timer = new Stopwatch();
 
-            // cycle time from minutes to milliseconds
-            var cycleMilliseconds = ps.settings.SyncTime * 60 * 1000;
+      // cycle time from 20 minutes to milliseconds
+      var cycleMilliseconds = ps.settings.SyncTime * 60 * 1000;
 
-            while (true)
-            {
-                timer.Reset();
-                timer.Start();
+      while (true)
+      {
+        timer.Reset();
+        timer.Start();
 
-                runCycle();
+        ps = new ProgramSettings();
 
-                timer.Stop();
+        DiscoverFilesActivity discoverActivity = new DiscoverFilesActivity(db, ps);
+        EncodeFilesActivity encodeActivity = new EncodeFilesActivity(db, ps);
+        UploadFilesActivity uploadActivity = new UploadFilesActivity(db, ps);
+        DownloadRssTorrentActivity rssDownloadActivity = new DownloadRssTorrentActivity(db, ps);
 
-                var elapsed = timer.ElapsedMilliseconds;
+        //runCycle();
+        //-----------
 
-                // wait if there was no enough work
-                if (cycleMilliseconds > elapsed)
-                {
-                    Thread.Sleep((int)(cycleMilliseconds - elapsed));
-                }
-            }
+        //downloadActivity.Execute();
 
+        rssDownloadActivity.Execute();
+
+        discoverActivity.Execute();
+
+        var discovered = db.GetDiscoveredFiles();
+
+        encodeActivity.Execute(discovered);
+
+        var encoded = db.GetEncodedFiles();
+
+        uploadActivity.Execute(encoded);
+
+        //--------
+
+        timer.Stop();
+
+        var elapsed = timer.ElapsedMilliseconds;
+
+        // wait if there was no enough work
+        if (cycleMilliseconds > elapsed)
+        {
+          Thread.Sleep((int)(cycleMilliseconds - elapsed));
         }
+      }
+
     }
+  }
 }

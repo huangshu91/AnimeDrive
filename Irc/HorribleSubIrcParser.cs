@@ -10,22 +10,9 @@ using System.Threading.Tasks;
 
 namespace AnimeDrive.Irc
 {
-    public class HorribleSubParser
+    public class HorribleSubIrcParser
     {
         private const string BOT_LINE_INDICATOR = "javascript:p.nickPacks('";
-
-        public static double ParseEpisode(string fName)
-        {
-            var lastDash = fName.LastIndexOf('-') + 1;
-            var lastRes = fName.LastIndexOf('[');
-            var numString = fName.Substring(lastDash, lastRes - lastDash);
-            numString = numString.Trim();
-
-            double res = 0;
-            Double.TryParse(numString, out res);
-
-            return res;
-        }
 
         internal async Task<IEnumerable<HorribleSubPack>> ParsePacklistAsync(
             Stream stream,

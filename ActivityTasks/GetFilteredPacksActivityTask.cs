@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace AnimeDrive.ActivityTasks
 {
-    public class GetFilteredPacksActivityTask
+    public class GetFilteredPacksActivityTask : ActivityBase
     {
-        public AnimeFileDatabase db;
-        public ProgramSettings ps;
-
         private HttpClient client;
 
         private GetPacklistActivityTask gpat;
@@ -24,11 +21,8 @@ namespace AnimeDrive.ActivityTasks
 
         const string filterRes = "720p";
 
-        public GetFilteredPacksActivityTask(AnimeFileDatabase db, ProgramSettings ps)
+        public GetFilteredPacksActivityTask(AnimeFileDatabase db, ProgramSettings ps) : base(db, ps)
         {
-            this.db = db;
-            this.ps = ps;
-
             client = new HttpClient();
             gpat = new GetPacklistActivityTask(client);
         }

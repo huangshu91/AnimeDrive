@@ -6,18 +6,32 @@ using System.Threading.Tasks;
 
 namespace AnimeDrive.Models
 {
-    public class AnimeDriveSettings
+  public class AnimeDriveSettings
+  {
+    public string HandbrakeCLIPath { get; set; }
+
+    public string QBittorrentCLIPath { get; set; }
+
+    public string QBittorrentURL { get; set; }
+
+    public string FolderInput { get; set; }
+
+    public string FolderOutput { get; set; }
+
+    public PatternFilter[] Patterns { get; set; }
+
+    public string Extensions { get; set; }
+
+    public string[] AllowedExt
     {
-        public string HandbrakeCLIPath { get; set; }
-
-        public string FolderInput { get; set; }
-
-        public string FolderOutput { get; set; }
-
-        public PatternFilter[] Patterns { get; set; }
-
-        public int SyncTime { get; set; }
-
-        public int FileExpiry { get; set; }
+      get
+      {
+        return Extensions.Split(',');
+      }
     }
+
+    public int SyncTime { get; set; }
+
+    public int FileExpiry { get; set; }
+  }
 }

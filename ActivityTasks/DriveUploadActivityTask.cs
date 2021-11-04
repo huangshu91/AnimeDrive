@@ -75,7 +75,7 @@ namespace AnimeDrive
                         Name = fi.Name,
                         Parents = new List<string>
                         {
-                            "root"
+                            "0Bwyizu5RNSItY3N4WXExVHhPUnM"
                         }
                     },
                     uploadStream,

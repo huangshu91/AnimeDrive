@@ -23,6 +23,8 @@ namespace AnimeDrive
 
         public bool Execute()
         {
+            Console.WriteLine("Discovering Files...");
+
             var patterns = ps.settings.Patterns;
             var dbFiles = db.files;
 
@@ -33,6 +35,10 @@ namespace AnimeDrive
             {
                 var fLower = f.ToLower();
                 FileInfo fileInfo = new FileInfo(f);
+
+                if (!ps.settings.AllowedExt.Contains(fileInfo.Extension)) {
+                    continue;
+                }
 
                 foreach (var p in patterns)
                 {

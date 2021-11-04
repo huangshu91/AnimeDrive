@@ -250,7 +250,10 @@ namespace AnimeDrive.Irc
                 //stop everything in right order
                 _receiverTask.Dispose();
                 _streamReader.Dispose();
-                _networkStream.Close();
+                if (_networkStream != null)
+                {
+                    _networkStream.Close();
+                }
                 _streamWriter.Close();
                 _tcpClient.Close();
 

@@ -68,14 +68,14 @@ namespace AnimeDrive
 
         public void Execute()
         {
+            Console.WriteLine("Downloading Files...");
+
             var packs = gfpat.Execute();
             var limitPacks = packs.Take(5);
 
             foreach (var pack in limitPacks)
             {
                 ircClient.SendMessageToAll(pack.ToString());
-
-                
 
                 Thread.Sleep(10000);
 
@@ -103,6 +103,7 @@ namespace AnimeDrive
                 }
             }
 
+            ircClient.StopClient();
         }
     }
 }

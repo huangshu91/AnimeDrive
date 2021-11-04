@@ -21,6 +21,8 @@ namespace AnimeDrive
 
         public bool Execute(List<AnimeFile> encodeFiles)
         {
+            Console.WriteLine(string.Format("Encoding {0} Files...", encodeFiles.Count));
+
             foreach (var f in encodeFiles)
             {
                 EncodeActivityTask task = new EncodeActivityTask();
@@ -28,6 +30,8 @@ namespace AnimeDrive
                 FileInfo fi = new FileInfo(f.filePath);
 
                 string outFile = Path.Combine(ps.settings.FolderOutput, fi.Name);
+
+                Console.WriteLine("Encoding - " + fi.Name);
 
                 task.Execute(ps.settings, f.filePath, outFile);
 
